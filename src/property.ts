@@ -226,6 +226,7 @@ export class ShaclProperty extends HTMLElement {
             newItem.dataset.value = 'new'
             newItem.classList.add('large')
             ul.appendChild(newItem)
+            /*
             const divider = document.createElement('li')
             divider.classList.add('divider')
             ul.appendChild(divider)
@@ -240,6 +241,7 @@ export class ShaclProperty extends HTMLElement {
                 li.dataset.value = JSON.stringify(instance.value)
                 ul.appendChild(li)
             }
+            */
             addButton.appendChild(ul)
             addButton.collapsibleWidth = '250px'
             addButton.collapsibleOrientationLeft = ''
