@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [22.x]
 
     steps:
     - uses: actions/checkout@v4
@@ -26,3 +26,26 @@ jobs:
       run: |
         npm install
         npm run build
+
+# Commit e push solo su push a main (non su PR)
+    - name: Check if bundle changed
+      if: github.event_name == 'push'
+      id: check_changes
+      run: |
+        git add dist/bundle.js
+        if git diff --cached --quiet; then
+          echo "changed=false" >> $GITHUB_OUTPUT
+        else
+          echo "changed=true" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Commit and push bundle.js
+      if: steps.check_changes.outputs.changed == 'true' && github.event_name == 'push'
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add dist/bundle.js
+        git commit -m "chore: update bundle.js [skip ci]"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
