@@ -199,15 +199,15 @@ export class ShaclProperty extends HTMLElement {
         addButton.classList.add('add-button')
 
         // load potential value candidates for linking
-        let instances: InputListEntry[] = []
-        let clazz = this.getRdfClassToLinkOrCreate()
+        //let instances: InputListEntry[] = []
         /*
+        let clazz = this.getRdfClassToLinkOrCreate()
         //Skip finding instaces of class
         if (clazz) {
             instances = findInstancesOf(clazz, this.template)
         }
         */
-        if (instances.length === 0) {
+        //if (instances.length === 0) {
             // no class instances found, so create an add button that creates a new instance
             addButton.emptyMessage = ''
             addButton.inputMinWidth = 0
@@ -221,6 +221,7 @@ export class ShaclProperty extends HTMLElement {
                     instance.classList.remove('fadeIn')
                 }, 200)
             })
+        /*
         } else {
             // some instances found, so create an add button that can create a new instance or link existing ones
             const ul = document.createElement('ul')
@@ -258,6 +259,7 @@ export class ShaclProperty extends HTMLElement {
                 addButton.value = ''
             })
         }
+        */
         return addButton
     }
 }
