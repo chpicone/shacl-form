@@ -29,7 +29,7 @@ jobs:
 
     - name: Rename bundle with build number
       run: |
-        mv dist/bundle.js dist/bundle-2.0.7-.${{ github.run_number }}.js
+        mv dist/bundle.js dist/bundle-2.0.7-${{ github.run_number }}.js
 
 # Commit e push solo su push a main (non su PR)
     - name: Check if bundle changed
