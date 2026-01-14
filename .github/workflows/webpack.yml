@@ -27,12 +27,16 @@ jobs:
         npm install
         npm run build
 
+    - name: Rename bundle with build number
+      run: |
+        mv dist/bundle.js dist/bundle-2.0.7-.${{ github.run_number }}.js
+
 # Commit e push solo su push a main (non su PR)
     - name: Check if bundle changed
       if: github.event_name == 'push'
       id: check_changes
       run: |
-        git add dist/bundle.js
+        git add dist/bundle-*.js
         if git diff --cached --quiet; then
           echo "changed=false" >> $GITHUB_OUTPUT
         else
